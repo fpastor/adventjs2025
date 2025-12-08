@@ -22,7 +22,6 @@ function decodeSantaPin(code) {
     }
     if (element === "-") {
         current--;
-
         if (current <= -1) current = 9;
     }
 });
