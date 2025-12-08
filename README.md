@@ -1,7 +1,6 @@
 # AdventJS 2025
 
-Mis soluciones al AdjentJS 2025
-https://adventjs.dev/es (https://adventjs.dev/es)
+Mis soluciones a los retos de [AdventJS 2025](https://adventjs.dev/es).
 
 ## Retos
 - [Reto 01 - Filtrar regalos defectuosos](reto-01/README.md)
