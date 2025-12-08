@@ -16,7 +16,6 @@ function manufactureGifts(giftsToProduce) {
   return result;
 }
 
-
 const production1 = [
   { toy: 'car', quantity: 3 },
   { toy: 'doll', quantity: 1 },
