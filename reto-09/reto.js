@@ -54,12 +54,36 @@ function moveReno(board, moves) {
     return boardArray[index];
   };
 
+  // ----------- UTILITY: IS INSIDE BOARD -----------
+  const isOutsideBoard = (x, y, boardWidth, boardHeight) => {
+    return x < 0 || x > boardWidth - 1 || y < 0 || y > boardHeight - 1;
+  };
+
   let renoIndex = boardArray.findIndex((value) => value === '@');
-  console.log(renoIndex);
+  // console.log(renoIndex);
 
   let renoPos = getPositionFromIndex(renoIndex, boardWidth, boardHeight);
-  console.log(renoPos);
+  // console.log(renoPos);
 
+  const movesArray = Array.from(moves);
+
+  for (let i = 0; i < movesArray.length; i++) {
+    if (movesArray[i] === 'U') { renoPos[1]--; }
+    else if (movesArray[i] === 'D') { renoPos[1]++; }
+    else if (movesArray[i] === 'L') { renoPos[0]--; }
+    else if (movesArray[i] === 'R') { renoPos[0]++; }
+
+    //console.log('Reno moves to:', renoPos)
+
+    if (
+      isOutsideBoard(renoPos[0], renoPos[1], boardWidth, boardHeight) ||
+      getContentFromPosition(renoPos[0], renoPos[1], boardArray, boardWidth) === '#') {
+      return 'crash';
+    };
+    if (getContentFromPosition(renoPos[0], renoPos[1], boardArray, boardWidth) === '*') {
+      return 'success';
+    };
+  }
   return 'fail';
 }
 
@@ -70,23 +94,23 @@ const board = `
 .....
 `
 
-moveReno(board, 'D')
+console.log('***', moveReno(board, 'D'), 'fail');
 // ➞ 'fail' -> se mueve pero no recoge nada
 
-// moveReno(board, 'U')
+console.log('***', moveReno(board, 'U'), 'success');
 // // ➞ 'success' -> recoge algo (*) justo encima
 
-// moveReno(board, 'RU')
+console.log('***', moveReno(board, 'RU'), 'crash');
 // // ➞ 'crash' -> choca contra un obstáculo (#)
 
-// moveReno(board, 'RRRUU')
+console.log('***', moveReno(board, 'RRRUU'), 'success');
 // // ➞ 'success' -> recoge algo (*)
 
-// moveReno(board, 'DD')
+console.log('***', moveReno(board, 'DD'), 'crash');
 // // ➞ 'crash' -> se choca con la parte de abajo del tablero
 
-// moveReno(board, 'UUU')
+console.log('***', moveReno(board, 'UUU'), 'success');
 // // ➞ 'success' -> recoge algo del suelo (*) y luego se choca por arriba
 
-// moveReno(board, 'RR')
+console.log('***', moveReno(board, 'RR'), 'fail');
 // // ➞ 'fail' -> se mueve pero no recoge nada
