@@ -23,7 +23,7 @@ function moveReno(board, moves) {
   const getPositionFromIndex = (index, width, height) => {
     const result = [];
     result[0] = index % width;
-    result[1] = Math.floor(index / height);
+    result[1] = Math.floor(index / width);
     return result;
   }
 
@@ -61,3 +61,32 @@ function moveReno(board, moves) {
   }
   return 'fail';
 }
+
+
+const board = `
+.....
+.*#.*
+.@...
+.....
+`
+
+console.log('***', moveReno(board, 'D'), 'fail');
+// ➞ 'fail' -> se mueve pero no recoge nada
+
+console.log('***', moveReno(board, 'U'), 'success');
+// // ➞ 'success' -> recoge algo (*) justo encima
+
+console.log('***', moveReno(board, 'RU'), 'crash');
+// // ➞ 'crash' -> choca contra un obstáculo (#)
+
+console.log('***', moveReno(board, 'RRRUU'), 'success');
+// // ➞ 'success' -> recoge algo (*)
+
+console.log('***', moveReno(board, 'DD'), 'crash');
+// // ➞ 'crash' -> se choca con la parte de abajo del tablero
+
+console.log('***', moveReno(board, 'UUU'), 'success');
+// // ➞ 'success' -> recoge algo del suelo (*) y luego se choca por arriba
+
+console.log('***', moveReno(board, 'RR'), 'fail');
+// // ➞ 'fail' -> se mueve pero no recoge nada
